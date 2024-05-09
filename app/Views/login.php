@@ -16,7 +16,7 @@
             <div class="alert alert-danger"><?= session()->getFlashdata('msg'); ?></div>
         <?php endif; ?>
 
-        <form method="post" action="<?php echo base_url('Login/auth'); ?>" class="mt-3">
+        <form method="post" action="<?php echo base_url('login/auth'); ?>" class="mt-3">
             <div class="form-group">
                 <label for="login">Login :</label>
                 <input type="text" class="form-control" id="login" name="login" required>

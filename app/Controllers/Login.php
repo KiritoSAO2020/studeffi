@@ -34,7 +34,8 @@ class Login extends Controller
 
                 $ses_data = [
 
-                    'id' => $data['id'],
+                    'ID' => $data['ID'],
+                    'login' => $data['login'],
                     'nom' => $data['nom'],
                     'prenom' => $data['prenom'],
                     'type_user' => $data['type_user'],
