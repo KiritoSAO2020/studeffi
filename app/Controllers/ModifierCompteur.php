@@ -4,25 +4,15 @@ namespace App\Controllers;
 use CodeIgniter\Controller;
 use App\Models\CompteurModel;
 
-class AjoutCompteur extends Controller
+class ModifierCompteur extends Controller
 {
-
-    public function index()
-    {
-        helper(['form']);
-
-        $session = session();
-        $data['loggin_in'] = $session->get('loggin_in');
-
-        echo view('ajoutcompteur', $data);
-
-    }
-    public function ajoutCompteur()
+    public function modifierCompteur()
     {
         $request = \Config\Services::request();
 
+        $id = $request->getPost('id');
+
         $data = array(
-            'ID' => $request->getPost('id'),
             'Nom_prop' => $request->getPost('nomProp'),
             'Num_voie' => $request->getPost('numVoie'),
             'Nom_voie' => $request->getPost('nomVoie'),
@@ -31,16 +21,14 @@ class AjoutCompteur extends Controller
         );
 
         $compteurModel = new CompteurModel();
-        $result = $compteurModel->insertCompteur($data);
+        $result = $compteurModel->updateCompteur($id,$data);
 
         if ($result) {
             // L'action s'est bien déroulée
-            echo '<script>alert("Le compteur a été ajouter"); window.location.href = "/studeffi/public/index.php/dashboard";</script>';
+            echo '<script>alert("Le compteur a été modifier"); window.location.href = "/studeffi/public/index.php/dashboard";</script>';
         } else {
             // En cas d'erreur
             echo '<script>alert("Une erreur est survenu, retour au dashboard ..."); window.location.href = "/studeffi/public/index.php/dashboard";</script>';
         }
     }
-
-
 }

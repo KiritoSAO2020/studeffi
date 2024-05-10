@@ -11,7 +11,7 @@ class Dashboard extends Controller
     {
 
         $session = session();
-        $data['nom'] = $session->get('nom');    
+        $data['nom'] = $session->get('nom');
         $data['prenom'] = $session->get('prenom');
         $data['type_user'] = $session->get('type_user');
         $data['loggin_in'] = $session->get('loggin_in');
@@ -39,8 +39,27 @@ class Dashboard extends Controller
             echo '<script>alert("La suppresion a rencontré un problème, retour au dashboard ..."); window.location.href = "/studeffi/public/index.php/dashboard";</script>';
         }
     }
-    public function ajoutCompteur()
+
+    public function modifierCompteur()
     {
+        helper(['form']);
+        $request = \Config\Services::request();
+        $id = $request->getPost('id');
+        
+        $compteurModel = new CompteurModel();
+        $compteur = $compteurModel->getCompteurById($id);
+        
+        $session = session();
+        $data['loggin_in'] = $session->get('loggin_in');
+        
+        // Rassembler les variables $compteur et $data dans un tableau associatif
+        $donnees_vue = [
+            'compteur' => $compteur,
+            'data' => $data
+        ];
+        
+        echo view('modifiercompteur', $donnees_vue);
+        
 
     }
 }

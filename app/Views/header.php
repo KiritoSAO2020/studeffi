@@ -114,8 +114,8 @@
             <li class="menu-toggle">
                 <button id="menuToggle">&#9776;</button>
             </li>
-            <?php if (isset($loggin_in) && $loggin_in == TRUE): ?>
-                <li class="menu-item hidden"><a href="ajoutcompteur">Ajouter un compteur</a></li>
+            <?php if (isset($loggin_in) && $loggin_in == TRUE or isset($data['loggin_in']) && $data['loggin_in'] == TRUE): ?>
+                <li class="menu-item hidden"><a href="<?= site_url('ajoutcompteur'); ?>">Ajouter un compteur</a></li>
                 <li class="menu-item hidden">
                     <?= anchor('/Login/logout', 'logout', ['class' => 'nav-link']); ?>
                 </li>
