@@ -37,7 +37,7 @@
                             <td><?php echo $compteur['Nom_voie']; ?></td>
                             <td><?php echo $compteur['CP']; ?></td>
                             <td><?php echo $compteur['Ville']; ?></td>
-                            <td>Null</td>
+                            <td><?php echo $compteur['Code_Insee']; ?></td>
                             <td>
                                 <div class="btn-group" role="group">
                                     <!-- Bouton pour supprimer un compteur par ID -->

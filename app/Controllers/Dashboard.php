@@ -18,9 +18,13 @@ class Dashboard extends Controller
 
         $compteurModel = new CompteurModel();
         $data['compteurs'] = $compteurModel->getCompteurs();
-
+        
+        foreach ($data['compteurs'] as $key => $compteur) {
+            $data['compteurs'][$key]['Code_Insee'] = $compteurModel->getAPICodeInsee($compteur['CP'],$compteur['Ville']);
+        }
+        
         echo view('header', $data);
-        echo view('dashboard', $data);
+        echo view('dashboard', $data);        
     }
     public function deleteCompteur()
     {
@@ -45,21 +49,21 @@ class Dashboard extends Controller
         helper(['form']);
         $request = \Config\Services::request();
         $id = $request->getPost('id');
-        
+
         $compteurModel = new CompteurModel();
         $compteur = $compteurModel->getCompteurById($id);
-        
+
         $session = session();
         $data['loggin_in'] = $session->get('loggin_in');
-        
+
         // Rassembler les variables $compteur et $data dans un tableau associatif
         $donnees_vue = [
             'compteur' => $compteur,
             'data' => $data
         ];
-        
+
         echo view('modifiercompteur', $donnees_vue);
-        
+
 
     }
 }

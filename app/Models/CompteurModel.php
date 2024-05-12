@@ -3,7 +3,8 @@ namespace App\Models;
 
 use CodeIgniter\Model;
 
-class CompteurModel extends Model{
+class CompteurModel extends Model
+{
 
     protected $table = 'compteur';
     protected $primaryKey = 'ID'; // Clé primaire de la table
@@ -34,4 +35,30 @@ class CompteurModel extends Model{
     {
         return $this->delete($id);
     }
+
+    // Dans votre modèle Compteurs_model.php par exemple
+
+    public function getAPICodeInsee($codePostal,$ville)
+    {
+        $curl = curl_init();
+        $url = "https://geo.api.gouv.fr/communes?codePostal=" . $codePostal . "&nom=" . $ville ;
+        curl_setopt($curl, CURLOPT_URL, $url);
+        curl_setopt($curl, CURLOPT_RETURNTRANSFER, true);
+        $response = curl_exec($curl);
+        $data = json_decode($response, true);
+        $codeInsee = null;
+
+        // Parcourir le tableau pour extraire le code INSEE
+        foreach ($data as $item) {
+            $codeInsee = $item['code'];
+            break; // Sortir de la boucle après avoir trouvé le premier code INSEE
+        }
+
+        curl_close($curl);
+
+        // Retourner le code INSEE extrait
+        return $codeInsee;
+
+    }
 }
+
