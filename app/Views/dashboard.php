@@ -15,7 +15,7 @@
         </div>
         <div class="container">
             <h2 class="text-center">Tableau des Informations</h2>
-            <table class="table">
+            <table class="table table-striped">
                 <thead class="thead-dark">
                     <tr>
                         <th>ID</th>
